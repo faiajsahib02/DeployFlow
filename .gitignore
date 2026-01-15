@@ -1,0 +1,48 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+vendor/
+bin/
+
+# Web/Node
+web/node_modules/
+web/dist/
+web/.cache/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Build artifacts
+build/
+tmp/
+
+# Secrets
+*.pem
+*.key
+secrets/
