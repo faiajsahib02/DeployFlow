@@ -14,11 +14,15 @@ A modern, full-stack application for managing Docker container deployments with 
 
 ## 🛠️ Tech Stack
 
+### Infrastructure & Containerization
+- **Docker** - Container runtime
+- **Docker Compose** - Multi-container orchestration
+- **Docker SDK** - Docker API integration
+
 ### Backend
 - **Go 1.25** - Fast, compiled backend service
 - **Chi Router** - Lightweight HTTP router
 - **PostgreSQL** - Relational database
-- **Docker SDK** - Docker API integration
 - **CORS** - Cross-origin resource sharing support
 
 ### Frontend
