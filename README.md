@@ -1,37 +1,55 @@
-# DepoyFlow
+# DeployFlow
 
-A modern, full-stack application for managing Docker container deployments with ease. DepoyFlow provides a web-based interface to deploy, manage, and monitor containerized applications with a clean, intuitive user experience.
+DeployFlow is a streamlined platform designed to empower data scientists to deploy machine learning models to production environments effortlessly. Say goodbye to the complexities of production infrastructure, server management, and deployment pipelines. With DeployFlow, focus on what you do best—building models—while we handle the rest.
 
-## 🚀 Features
+## The Core Problem: "The Model Handover Gap"
 
-- **Docker Integration**: Seamlessly manage Docker containers and deployments
-- **Project Management**: Organize deployments by projects
-- **Real-time Monitoring**: Track deployment status and container health
-- **REST API**: Full-featured API for programmatic deployment management
-- **Web Dashboard**: Modern React-based UI for managing deployments
-- **Database Persistence**: PostgreSQL backend for reliable data storage
-- **Docker Compose Support**: Easy local development setup
+In most companies, there is a massive wall between Data Scientists and DevOps Engineers.
+
+Data Scientists write code in Python (Jupyter Notebooks). They care about accuracy, math, and experimentation. They are bad at Docker, networking, and latency.
+
+Production Engineers care about speed, uptime, and security. They hate messy Python scripts that crash servers.
+
+**The Pain Point**: A Data Scientist builds a great model, emails the file to an Engineer, and the Engineer spends 2 weeks trying to make it run on a server. It is slow, manual, and frustrating.
+
+## The Solution: DeployFlow
+
+You built DeployFlow to automate this handover.
+
+It is a platform where a Data Scientist can just upload their model.pkl file, and DeployFlow automatically:
+
+- Wraps it in a Docker container.
+- Spins up a high-performance Go proxy in front of it (for speed/security).
+- Deploys it to a live URL (e.g., api.deployflow.com/v1/predict).
+
+## The Technical Motivation (Why Go + Python?)
+
+You realized that while Python is the king of AI, it is slow for handling HTTP requests and concurrency.
+
+**Motivation**: You wanted the best of both worlds.
+
+**Architecture**: You used Go for the "Infrastructure Layer" (handling traffic, routing, load balancing) because it is fast. You used Python only for the mathematical inference.
 
 ## 🛠️ Tech Stack
 
 ### Infrastructure & Containerization
-- **Docker** - Container runtime
+- **Docker** - Container runtime for model isolation
 - **Docker Compose** - Multi-container orchestration
-- **Docker SDK** - Docker API integration
+- **Docker SDK** - Docker API integration for automated deployments
 
 ### Backend
-- **Go 1.25** - Fast, compiled backend service
+- **Go 1.25** - High-performance backend service
 - **Chi Router** - Lightweight HTTP router
-- **PostgreSQL** - Relational database
+- **PostgreSQL** - Relational database for deployment metadata
 - **CORS** - Cross-origin resource sharing support
 
 ### Frontend
 - **React 19** - Modern UI framework
 - **TypeScript** - Type-safe JavaScript
-- **Vite** - Next-generation build tool
+- **Vite** - Fast build tool
 - **Tailwind CSS** - Utility-first CSS framework
 - **Radix UI** - Accessible component library
-- **Axios** - HTTP client
+- **Axios** - HTTP client for API communication
 
 ## 📋 Prerequisites
 
@@ -84,19 +102,19 @@ deployflow/
 │       └── main.go              # Application entry point
 ├── internal/
 │   ├── adapter/
-│   │   ├── handler/             # HTTP request handlers
-│   │   ├── proxy/               # HTTP proxy functionality
-│   │   ├── runtime/             # Docker client integration
+│   │   ├── handler/             # HTTP request handlers for deployment operations
+│   │   ├── proxy/               # HTTP proxy for model serving
+│   │   ├── runtime/             # Docker client for container management
 │   │   └── storage/
-│   │       └── postgres/        # Database layer
+│   │       └── postgres/        # Database layer for deployment metadata
 │   ├── core/
-│   │   ├── domain/              # Domain models
+│   │   ├── domain/              # Domain models for projects and deployments
 │   │   ├── ports/               # Interface definitions
-│   │   └── services/            # Business logic
-│   └── utils/                   # Utility functions
+│   │   └── services/            # Business logic for deployment workflows
+│   └── utils/                   # Utility functions (e.g., tarball creation)
 ├── web/                         # React frontend
 │   ├── src/
-│   │   ├── components/          # React components
+│   │   ├── components/          # React components for dashboard and deployment UI
 │   │   ├── services/            # API service layer
 │   │   └── lib/                 # Utility functions
 │   └── public/                  # Static assets
@@ -110,10 +128,10 @@ deployflow/
 The API is available at `http://localhost:8080/api/v1/`
 
 ### Key Endpoints
-- `GET /api/v1/projects` - List all projects
-- `POST /api/v1/projects` - Create new project
-- `GET /api/v1/deployments` - List deployments
-- `POST /api/v1/deployments` - Create new deployment
+- `GET /api/v1/projects` - List all ML model projects
+- `POST /api/v1/projects` - Create new model project
+- `GET /api/v1/deployments` - List model deployments
+- `POST /api/v1/deployments` - Deploy a new model
 
 ## 🔧 Configuration
 
@@ -158,7 +176,7 @@ cd web && npm run lint
 Migrations are located in `internal/adapter/storage/postgres/migrations/`
 
 Currently includes:
-- `000001_init_schema.up.sql` - Initial schema setup
+- `000001_init_schema.up.sql` - Initial schema setup for projects and deployments
 
 ## 🤝 Contributing
 
@@ -180,4 +198,4 @@ For issues, questions, or suggestions, please open an issue on GitHub.
 
 ---
 
-**Built with ❤️ by Sahib**
+
