@@ -1,6 +1,6 @@
 # DeployFlow
 
-DeployFlow is a streamlined platform designed to empower data scientists to deploy machine learning models to production environments effortlessly. Say goodbye to the complexities of production infrastructure, server management, and deployment pipelines. With DeployFlow, focus on what you do best—building models—while we handle the rest.
+DeployFlow is a streamlined platform designed to empower data scientists to deploy machine learning models to production environments effortlessly. Say goodbye to the complexities of production infrastructure, server management, and deployment pipelines. With DeployFlow, focus on what you do best building models while we handle the rest.
 
 ## The Core Problem: "The Model Handover Gap"
 
@@ -14,9 +14,9 @@ Production Engineers care about speed, uptime, and security. They hate messy Pyt
 
 ## The Solution: DeployFlow
 
-You built DeployFlow to automate this handover.
+DeployFlow is built to automate this handover.
 
-It is a platform where a Data Scientist can just upload their model.pkl file, and DeployFlow automatically:
+It is a platform where a Data Scientist can just upload their model.py/model.pkl file, and DeployFlow automatically:
 
 - Wraps it in a Docker container.
 - Spins up a high-performance Go proxy in front of it (for speed/security).
@@ -24,11 +24,9 @@ It is a platform where a Data Scientist can just upload their model.pkl file, an
 
 ## The Technical Motivation (Why Go + Python?)
 
-You realized that while Python is the king of AI, it is slow for handling HTTP requests and concurrency.
+while Python is the king of AI, it is slow for handling HTTP requests and concurrency.
 
-**Motivation**: You wanted the best of both worlds.
-
-**Architecture**: You used Go for the "Infrastructure Layer" (handling traffic, routing, load balancing) because it is fast. You used Python only for the mathematical inference.
+**Architecture**: Used Go for the "Infrastructure Layer" (handling traffic, routing, load balancing) because it is fast.  Used Python only for the mathematical inference.
 
 ## 🛠️ Tech Stack
 
